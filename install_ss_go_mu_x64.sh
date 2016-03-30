@@ -1,4 +1,5 @@
 yum -y install git
+yum -y install wget
 cd /root/
 wget https://storage.googleapis.com/golang/go1.6.linux-amd64.tar.gz --no-check-certificate
 tar -zxvf go1.6.linux-amd64.tar.gz -C /usr/local
