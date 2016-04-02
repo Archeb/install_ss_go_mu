@@ -9,7 +9,7 @@ fi
 # Pre-Set
 read -p "Yout mu address:" muaddr
 read -p "Your mu key:" mukey
-read -p "Node code:" nodecode
+read -p "Node ID:" nodeid
 echo -e "\n\033[32m===============Installtion start================\033[0m\n"
 
 # Install envs and supervisor
@@ -35,7 +35,7 @@ go build
 cp example.conf config.conf
 sed -i "s|url http://sspanel.dev/mu|url $muaddr|" config.conf
 sed -i "s/key key/key $mukey/" config.conf
-sed -i "s/key key/key $mukey/" config.conf
+sed -i "s/node_id 1/node_id $nodeid/" config.conf
 sed -i "s/pass/#pass/" config.conf
 
 # Install Redis

@@ -34,6 +34,7 @@ go build
 cp example.conf config.conf
 sed -i "s|url http://sspanel.dev/mu|url $muaddr|" config.conf
 sed -i "s/key key/key $mukey/" config.conf
+sed -i "s/node_id 1/node_id $nodeid/" config.conf
 sed -i "s/pass/#pass/" config.conf
 
 # Install Redis
