@@ -12,17 +12,17 @@ read -p "Your mu key:" mukey
 printf "\n===============Installtion start================\n\n"
 
 # Install envs and supervisor
-echo "Installing envs"
+echo -e "\033[32mInstalling envs\033[0m"
 (yum -y install git gcc make wget openssl screen python-setuptools && easy_install supervisor) >/dev/null
 
 # Install Golang
-echo "Installing Golang"
+echo -e "\033[32mInstalling Golang\033[0m"
 (cd && wget https://storage.googleapis.com/golang/go1.6.linux-amd64.tar.gz -o/dev/null --no-check-certificate && \
 tar -zxf go1.6.linux-amd64.tar.gz -C /usr/local) >/dev/null
 export PATH=$PATH:/usr/local/go/bin
 
 # Install Shadowsocks-go
-echo "Installing Shadowsocks-go"
+echo -e "\033[32mInstalling Shadowsocks-go\033[0m"
 git clone https://github.com/orvice/shadowsocks-go.git >/dev/null
 export GOPATH=/root/shadowsocks-go
 go get github.com/shadowsocks/shadowsocks-go/cmd/shadowsocks-server >/dev/null
@@ -36,12 +36,12 @@ sed -i "s/key key/key $mukey/" config.conf
 sed -i "s/pass/#pass/" config.conf >/dev/null
 
 # Install Redis
-echo "Installing Redis"
+echo -e "\033[32mInstalling Redis\033[0m"
 cd && wget http://download.redis.io/releases/redis-3.0.7.tar.gz -o/dev/null  && tar -zxf redis-3.0.7.tar.gz && cd redis-3.0.7 && make MALLOC=libc &>/tmp/redis.log
 wget -N --no-check-certificate -O ~/redis-3.0.7/redis.conf -o/dev/null https://raw.githubusercontent.com/popu125/install_ss_go_mu/master/redis.conf >/dev/null
 
 # Set Supervisor
-echo "Setting Supervisor"
+echo -e "\033[32mSetting Supervisor\033[0m"
 wget -N --no-check-certificate -O /etc/supervisord.conf -o/dev/null https://raw.githubusercontent.com/popu125/install_ss_go_mu/master/supervisord.conf >/dev/null
 touch ~/ssgo.log
 sed -i '$ i\/usr\/bin\/supervisord -c \/etc\/supervisord.conf' /etc/rc.local
