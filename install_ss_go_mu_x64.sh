@@ -38,22 +38,24 @@ sed -i "s/pass/#pass/" config.conf
 
 # Install Redis
 echo -e "\033[32mInstalling Redis\033[0m"
-cd && wget http://download.redis.io/releases/redis-3.0.7.tar.gz -o/dev/null  && tar -zxf redis-3.0.7.tar.gz && cd redis-3.0.7 && make MALLOC=libc &>/tmp/redis.log
+cd && wget http://download.redis.io/releases/redis-3.0.7.tar.gz -o/dev/null  && tar -zxf redis-3.0.7.tar.gz && cd redis-3.0.7 && make MALLOC=libc &>/tmp/redisbuild.log
 wget --no-check-certificate -O ~/redis-3.0.7/redis.conf -o/dev/null https://raw.githubusercontent.com/popu125/install_ss_go_mu/master/redis.conf >/dev/null
 
 # Set Supervisor
 echo -e "\033[32mSetting Supervisor\033[0m"
 wget --no-check-certificate -O /etc/supervisord.conf -o/dev/null https://raw.githubusercontent.com/popu125/install_ss_go_mu/master/supervisord.conf >/dev/null
 touch ~/ssgo.log
+sed -i '$ i/root/redis-3.0.7/src/redis-server /root/redis-3.0.7/redis.conf' /etc/rc.local
 sed -i '$ i\/usr\/bin\/supervisord -c \/etc\/supervisord.conf' /etc/rc.local
 
 
 # Almost complate
 service iptables stop >/dev/null
 if [ ! -f "/root/shadowsocks-go/mu/mu" -o ! -f "/root/redis-3.0.7/src/redis-server" -o ! -f "/usr/bin/supervisord" ]; then
-	echo -e "\033[32m\n===============Installtion error================\n\nRedis compilation log is in /tmp/redis.log\033[0m"
+	echo -e "\033[32m\n===============Installtion error================\n\nRedis compilation log is in /tmp/redisbuild.log\033[0m"
 	exit 1
 fi
 
+/usr/bin/supervisord -c /etc/supervisord.conf
 echo -e "\033[32m\n=============Installtion complated==============\n\033[0m"
 
