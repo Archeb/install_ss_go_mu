@@ -9,6 +9,7 @@ fi
 # Pre-Set
 read -p "Yout mu address:" muaddr
 read -p "Your mu key:" mukey
+read -p "Node ID:" nodeid
 echo -e "\n\033[32m===============Installtion start================\033[0m\n"
 
 # Install envs and supervisor
