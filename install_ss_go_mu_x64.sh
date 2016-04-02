@@ -29,7 +29,7 @@ go get github.com/shadowsocks/shadowsocks-go/cmd/shadowsocks-server >/dev/null
 git clone https://github.com/go-redis/redis.git ~/shadowsocks-go/src/gopkg.in/redis.v3 &>/dev/null
 git clone https://github.com/bsm/ratelimit.git ~/shadowsocks-go/src/gopkg.in/bsm/ratelimit.v1 &>/dev/null
 cd ~/shadowsocks-go/mu
-go get
+go get &>/dev/null
 go build
 cp example.conf config.conf
 sed -i "s|url http://sspanel.dev/mu|url $muaddr|" config.conf
