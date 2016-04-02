@@ -50,7 +50,7 @@ sed -i '$ i\/usr\/bin\/supervisord -c \/etc\/supervisord.conf' /etc/rc.local
 
 # Almost complate
 service iptables stop >/dev/null
-if [ ! -f "~/shadowsocks-go/mu/mu" -o ! -f "/root/redis-3.0.7/src/redis-server" -o ! -f "/usr/bin/supervisord" ]; then
+if [ ! -f "/root/shadowsocks-go/mu/mu" -o ! -f "/root/redis-3.0.7/src/redis-server" -o ! -f "/usr/bin/supervisord" ]; then
 	echo -e "\033[32m\n===============Installtion error================\n\nRedis compilation log is in /tmp/redis.log\033[0m"
 	exit 1
 fi
