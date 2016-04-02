@@ -9,7 +9,7 @@ fi
 # Pre-Set
 read -p "Yout mu address:" muaddr
 read -p "Your mu key:" mukey
-printf "\n===============Installtion start================\n\n"
+echo -e "\n\033[32m===============Installtion start================\033[0m\n"
 
 # Install envs and supervisor
 echo -e "\033[32mInstalling envs\033[0m"
@@ -17,21 +17,21 @@ echo -e "\033[32mInstalling envs\033[0m"
 
 # Install Golang
 echo -e "\033[32mInstalling Golang\033[0m"
-(cd && wget https://storage.googleapis.com/golang/go1.6.linux-386.tar.gz -o/dev/null --no-check-certificate && \
-tar -zxf go1.6.linux-386.tar.gz -C /usr/local) >/dev/null
+cd && wget https://storage.googleapis.com/golang/go1.6.linux-386.tar.gz -o/dev/null --no-check-certificate && \
+tar -zxf go1.6.linux-386.tar.gz -C /usr/local
 export PATH=$PATH:/usr/local/go/bin
 
 # Install Shadowsocks-go
 echo -e "\033[32mInstalling Shadowsocks-go\033[0m"
-git clone https://github.com/orvice/shadowsocks-go.git >/dev/null
+git clone https://github.com/orvice/shadowsocks-go.git &>/dev/null
 export GOPATH=/root/shadowsocks-go
 go get github.com/shadowsocks/shadowsocks-go/cmd/shadowsocks-server >/dev/null
-git clone https://github.com/go-redis/redis.git ~/shadowsocks-go/src/gopkg.in/redis.v3 >/dev/null
-git clone https://github.com/bsm/ratelimit.git ~/shadowsocks-go/src/gopkg.in/bsm/ratelimit.v1 >/dev/null
+git clone https://github.com/go-redis/redis.git ~/shadowsocks-go/src/gopkg.in/redis.v3 &>/dev/null
+git clone https://github.com/bsm/ratelimit.git ~/shadowsocks-go/src/gopkg.in/bsm/ratelimit.v1 &>/dev/null
 cd ~/shadowsocks-go/mu
-go get >/dev/null && go build >/dev/null
+go get &>/dev/null && go build >/dev/null
 cp example.conf config.conf
-sed "s/url http:\/\/sspanel.dev\/mu/url $muaddr/" config.conf
+sed -i "s/url http:\/\/sspanel.dev\/mu/url $muaddr/" config.conf
 sed -i "s/key key/key $mukey/" config.conf
 sed -i "s/pass/#pass/" config.conf >/dev/null
 
@@ -50,9 +50,9 @@ sed -i '$ i\/usr\/bin\/supervisord -c \/etc\/supervisord.conf' /etc/rc.local
 # Almost complate
 service iptables stop
 if [ ! -f "~/shadowsocks-go/mu/mu" -o ! -f "/root/redis-3.0.7/src/redis-server" -o ! -f "/usr/bin/supervisord" ]; then
-	printf "\n===============Installtion error================\n\nRedis compilation log is in /tmp/redis.log"
+	echo -e "\033[32m\n===============Installtion error================\n\nRedis compilation log is in /tmp/redis.log\033[0m"
 	exit 1
 fi
 
-printf "\n=============Installtion complated==============\n\n"
+echo -e "\033[32m\n=============Installtion complated==============\n\033[0m"
 
