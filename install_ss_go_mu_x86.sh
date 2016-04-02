@@ -27,8 +27,9 @@ git clone https://github.com/bsm/ratelimit.git ~/shadowsocks-go/src/gopkg.in/bsm
 cd ~/shadowsocks-go/mu
 go get && go build
 cp example.conf config.conf
-sed "s/url http:\/\/sspanel.dev\/mu/url $muaddr/" config.conf
+sed -i "s/url http:\/\/sspanel.dev\/mu/url $muaddr/" config.conf
 sed -i "s/key key/key $mukey/" config.conf
+sed -i "s/pass/#pass/" config.conf
 
 # Install Redis
 cd && wget http://download.redis.io/releases/redis-3.0.7.tar.gz && tar -zxvf redis-3.0.7.tar.gz && cd redis-3.0.7 && make MALLOC=libc
