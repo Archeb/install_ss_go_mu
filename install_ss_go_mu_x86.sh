@@ -15,7 +15,7 @@ yum -y install git gcc make wget openssl screen python-setuptools && easy_instal
 
 # Install Golang
 cd && wget https://storage.googleapis.com/golang/go1.6.linux-386.tar.gz --no-check-certificate && \
-tar -zxvf go1.6.linux-386.tar.gz -C /usr/local
+tar -zxf go1.6.linux-386.tar.gz -C /usr/local
 export PATH=$PATH:/usr/local/go/bin
 
 # Install Shadowsocks-go
@@ -32,7 +32,7 @@ sed -i "s/key key/key $mukey/" config.conf
 sed -i "s/pass/#pass/" config.conf
 
 # Install Redis
-cd && wget http://download.redis.io/releases/redis-3.0.7.tar.gz && tar -zxvf redis-3.0.7.tar.gz && cd redis-3.0.7 && make MALLOC=libc
+cd && wget http://download.redis.io/releases/redis-3.0.7.tar.gz && tar -zxf redis-3.0.7.tar.gz && cd redis-3.0.7 && make MALLOC=libc
 wget -N --no-check-certificate https://raw.githubusercontent.com/popu125/install_ss_go_mu/master/redis.conf 
 
 # Set Supervisor
