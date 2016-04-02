@@ -29,11 +29,11 @@ go get github.com/shadowsocks/shadowsocks-go/cmd/shadowsocks-server >/dev/null
 git clone https://github.com/go-redis/redis.git ~/shadowsocks-go/src/gopkg.in/redis.v3 &>/dev/null
 git clone https://github.com/bsm/ratelimit.git ~/shadowsocks-go/src/gopkg.in/bsm/ratelimit.v1 &>/dev/null
 cd ~/shadowsocks-go/mu
-go get &>/dev/null && go build >/dev/null
+go build >/dev/null
 cp example.conf config.conf
 sed -i "s/url http:\/\/sspanel.dev\/mu/url $muaddr/" config.conf
 sed -i "s/key key/key $mukey/" config.conf
-sed -i "s/pass/#pass/" config.conf >/dev/null
+sed -i "s/pass/#pass/" config.conf
 
 # Install Redis
 echo -e "\033[32mInstalling Redis\033[0m"
@@ -48,7 +48,7 @@ sed -i '$ i\/usr\/bin\/supervisord -c \/etc\/supervisord.conf' /etc/rc.local
 
 
 # Almost complate
-service iptables stop
+service iptables stop >/dev/null
 if [ ! -f "~/shadowsocks-go/mu/mu" -o ! -f "/root/redis-3.0.7/src/redis-server" -o ! -f "/usr/bin/supervisord" ]; then
 	echo -e "\033[32m\n===============Installtion error================\n\nRedis compilation log is in /tmp/redis.log\033[0m"
 	exit 1
