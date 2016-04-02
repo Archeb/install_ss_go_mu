@@ -56,6 +56,7 @@ if [ ! -f "/root/shadowsocks-go/mu/mu" -o ! -f "/root/redis-3.0.7/src/redis-serv
 	exit 1
 fi
 
+/root/redis-3.0.7/src/redis-server /root/redis-3.0.7/redis.conf
 /usr/bin/supervisord -c /etc/supervisord.conf
 echo -e "\033[32m\n=============Installtion complated==============\n\033[0m"
 

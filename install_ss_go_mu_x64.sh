@@ -9,6 +9,7 @@ fi
 # Pre-Set
 read -p "Yout mu address:" muaddr
 read -p "Your mu key:" mukey
+read -p "Node code:" nodecode
 echo -e "\n\033[32m===============Installtion start================\033[0m\n"
 
 # Install envs and supervisor
@@ -34,6 +35,7 @@ go build
 cp example.conf config.conf
 sed -i "s|url http://sspanel.dev/mu|url $muaddr|" config.conf
 sed -i "s/key key/key $mukey/" config.conf
+sed -i "s/key key/key $mukey/" config.conf
 sed -i "s/pass/#pass/" config.conf
 
 # Install Redis
@@ -56,6 +58,7 @@ if [ ! -f "/root/shadowsocks-go/mu/mu" -o ! -f "/root/redis-3.0.7/src/redis-serv
 	exit 1
 fi
 
+/root/redis-3.0.7/src/redis-server /root/redis-3.0.7/redis.conf
 /usr/bin/supervisord -c /etc/supervisord.conf
 echo -e "\033[32m\n=============Installtion complated==============\n\033[0m"
 
