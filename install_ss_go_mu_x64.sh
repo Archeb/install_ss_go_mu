@@ -27,7 +27,7 @@ echo -e "\033[32mInstalling Shadowsocks-go\033[0m"
 git clone https://github.com/orvice/shadowsocks-go.git &>/dev/null
 export GOPATH=/root/shadowsocks-go
 go get github.com/shadowsocks/shadowsocks-go/cmd/shadowsocks-server >/dev/null
-git clone https://github.com/go-redis/redis.git ~/shadowsocks-go/src/gopkg.in/redis.v3 &>/dev/null
+git clone -b v3 https://github.com/go-redis/redis.git ~/shadowsocks-go/src/gopkg.in/redis.v3 &>/dev/null
 git clone https://github.com/bsm/ratelimit.git ~/shadowsocks-go/src/gopkg.in/bsm/ratelimit.v1 &>/dev/null
 cd ~/shadowsocks-go/mu
 go get &>/dev/null
